@@ -7,16 +7,22 @@ interface Post {
     slug: string,
     author: string,
     created_at: string,
+    handleDelete: (slug: string) => void
 }
 
 const ArticleCard: React.FC<Post> = (props) => {
 
-    const { title, synopsis } = props;
+    const { title, synopsis, slug, handleDelete } = props;
+
+    const onHandleDelete = (slug: string) => {
+        handleDelete(slug)
+    }
 
     return (
         <article className="relative bg-gray-50 hover:bg-gray-100 border rounded-lg py-3 px-5">
             <button
                 type="button"
+                onClick={() => onHandleDelete(slug)}
                 className="absolute top-0 right-0 bg-red-600 py-2 px-2 rounded text-gray-50 z-10"
             >
                 <svg
@@ -34,7 +40,7 @@ const ArticleCard: React.FC<Post> = (props) => {
                     />
                 </svg>
             </button>
-            <Link href="/" className="block">
+            <Link href={`/blog/${slug}`} className="block">
                 <section className="mb-2.5">
                     <h2 className="font-semibold text-lg md:text-xl text-gray-700">{title}</h2>
                 </section>
