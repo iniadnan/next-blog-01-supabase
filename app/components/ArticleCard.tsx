@@ -1,4 +1,18 @@
-export default function ArticleCard() {
+import Link from 'next/link'
+
+interface Post {
+    title: string,
+    text: string,
+    synopsis: string,
+    slug: string,
+    author: string,
+    created_at: string,
+}
+
+const ArticleCard: React.FC<Post> = (props) => {
+
+    const { title, synopsis } = props;
+
     return (
         <article className="relative bg-gray-50 hover:bg-gray-100 border rounded-lg py-3 px-5">
             <button
@@ -20,14 +34,16 @@ export default function ArticleCard() {
                     />
                 </svg>
             </button>
-            <div className="block">
+            <Link href="/" className="block">
                 <section className="mb-2.5">
-                    <h2 className="font-semibold text-lg md:text-xl text-gray-700">ddd</h2>
+                    <h2 className="font-semibold text-lg md:text-xl text-gray-700">{title}</h2>
                 </section>
                 <div>
-                    <p className="text-sm md:text-base text-gray-700">hahah</p>
+                    <p className="text-sm md:text-base text-gray-700">{synopsis}</p>
                 </div>
-            </div>
+            </Link>
         </article>
     )
 }
+
+export default ArticleCard
