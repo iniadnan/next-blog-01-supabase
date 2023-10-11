@@ -1,3 +1,7 @@
+"use client"
+
+import InputForm from "../components/InputForm"
+
 export default function page() {
     return (
         <main className="w-full pt-10 md:pt-14 pb-10 md:pb-20">
@@ -31,10 +35,10 @@ export default function page() {
                     </div>
                     <form className="w-6/12">
                         <div className="mb-5">
-                            <input className="w-full py-3 px-4 rounded-md bg-slate-100 text-base focus:ring-4 focus:outline-none focus:ring-blue-300" type="text" placeholder="Name" />
+                            <InputForm placeholder="Name" type="text" name="name" label={false} />
                         </div>
                         <div className="mb-5">
-                            <input className="w-full py-3 px-4 rounded-md bg-slate-100 text-base focus:ring-4 focus:outline-none focus:ring-blue-300" type="text" placeholder="Email" />
+                            <InputForm placeholder="Email" type="text" name="email" label={false} />
                         </div>
                         <div className="mb-5">
                             <textarea className="w-full py-3 px-4 rounded-md bg-slate-100 text-base focus:ring-4 focus:outline-none focus:ring-blue-300" rows={10} placeholder="Message"></textarea>
