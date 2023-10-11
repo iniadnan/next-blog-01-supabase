@@ -1,9 +1,43 @@
 "use client"
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 import Navbar from "../components/Navbar"
 import InputForm from "../components/InputForm"
+import SUPABASE from "../api/supabaseClient"
 
 export default function Page() {
+    const router = useRouter()
+    const [inputs, setInputs] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
+
+    const onHandleChange = (event: { target: { name: string; value: string; }; }) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        console.log(name)
+        console.log(value)
+        setInputs(values => ({ ...values, [name]: value }))
+    }
+
+    async function insertContact() {
+        try {
+            const { error } = await SUPABASE.from('contacts').insert({
+                name: inputs.name,
+                email: inputs.email,
+                message: inputs.message,
+            })
+
+            if (error !== null) {
+                throw error
+            }
+
+            router.push('/')
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <>
@@ -39,16 +73,16 @@ export default function Page() {
                         </div>
                         <form className="w-6/12">
                             <div className="mb-5">
-                                <InputForm placeholder="Name" type="text" name="name" label={false} />
+                                <InputForm placeholder="Name" type="text" onChangeValue={onHandleChange} name="name" label={false} />
                             </div>
                             <div className="mb-5">
-                                <InputForm placeholder="Email" type="text" name="email" label={false} />
+                                <InputForm placeholder="Email" type="email" onChangeValue={onHandleChange} name="email" label={false} />
                             </div>
                             <div className="mb-5">
-                                <textarea className="w-full py-3 px-4 rounded-md bg-slate-100 text-base focus:ring-4 focus:outline-none focus:ring-blue-300" rows={10} placeholder="Message"></textarea>
+                                <textarea className="w-full py-3 px-4 rounded-md bg-slate-100 text-base focus:ring-4 focus:outline-none focus:ring-blue-300" name="message" rows={10} onChange={onHandleChange} placeholder="Message"></textarea>
                             </div>
                             <div>
-                                <button type="button" className="w-full text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium py-3 px-5 rounded-lg">Submit</button>
+                                <button type="button" onClick={insertContact} className="w-full text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium py-3 px-5 rounded-lg">Submit</button>
                             </div>
                         </form>
                     </div>

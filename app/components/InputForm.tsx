@@ -7,7 +7,7 @@ interface Props {
     label: boolean
     placeholder?: string | undefined
     value?: string | undefined
-    onChangeValue?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputForm: React.FC<Props> = (props) => {
