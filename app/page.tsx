@@ -68,10 +68,25 @@ export default function Page() {
     setIsShowModal(!isShowModal)
   }
 
+  const onHandleChange = (event: { target: { value: string; }; }) => {
+    const value = event.target.value;
+
+    if (value.length == 0) {
+      return setPosts(allPosts)
+    }
+
+    const filteredPosts = allPosts.filter((post: Posts) => {
+      return post.title.toLowerCase().includes(value.toLowerCase())
+    })
+
+    setPosts(filteredPosts)
+
+  }
+
   return (
     <>
       <Navbar newPost={true} navHandleModal={appHandleModal} />
-      <Header />
+      <Header onChangeValue={onHandleChange} />
       <main className="w-full md:pt-10 pb-10">
         <div className="container mx-auto px-5 w-full md:w-[900px] lg:w-[1200px]">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
