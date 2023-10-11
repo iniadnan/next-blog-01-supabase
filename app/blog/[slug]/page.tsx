@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Navbar from "../../components/Navbar"
 import SUPABASE from "../../api/supabaseClient"
 import InputForm from "../../components/InputForm"
@@ -17,6 +17,7 @@ interface Post {
 
 export default function Page() {
     const { slug: getSlug } = useParams()
+    const router = useRouter()
     const [post, setPost] = useState<Post>(
         {
             id: 0,
@@ -50,6 +51,22 @@ export default function Page() {
         }
     }
 
+    async function editPost(id: number) {
+        try {
+            const { error: errorUpdate } = await SUPABASE.from('posts')
+                .update(post)
+                .eq('id', id)
+
+            if (errorUpdate !== null) {
+                throw errorUpdate
+            }
+
+            router.push('/')
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const onHandleChange = (event: { target: { name: string; value: string; }; }) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -78,6 +95,7 @@ export default function Page() {
                     </div>
                     <div className="flex items-center justify-end gap-x-6 pr-8">
                         <button
+                            onClick={() => editPost(post.id)}
                             type="button"
                             className="text-base text-white py-1.5 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium"
                         >
