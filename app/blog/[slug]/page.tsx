@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from 'next/navigation'
 import SUPABASE from "../../api/supabaseClient"
+import InputForm from "../../components/InputForm"
 
 interface Post {
     id: number,
@@ -48,14 +49,20 @@ export default function Page() {
         }
     }
 
+    const onHandleChange = (event: { target: { name: string; value: string; }; }) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setPost(values => ({ ...values, [name]: value }))
+    }
+
     return (
         <>
             <main className="py-10">
                 <form id="form__modal" name="form__modal" className="py-5 w-full max-w-[800px] mx-auto">
-                    {/* <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="title" id="title" title="Title" value={post.title} />
-                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="synopsis" id="synopsis" title="Synopsis" value={post.synopsis} />
-                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="slug" id="slug" title="Slug" value={post.slug} />
-                    <InputForm addClass="mb-5" type="text" onChangeValue={onHandleChange} name="author" id="author" title="Author" value={post.author} /> */}
+                    <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="title" id="title" title="Title" value={post.title} />
+                    <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="synopsis" id="synopsis" title="Synopsis" value={post.synopsis} />
+                    <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="slug" id="slug" title="Slug" value={post.slug} />
+                    <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="author" id="author" title="Author" value={post.author} />
                     <div className="mb-5">
                         <label htmlFor="text" className="text-base text-gray-700 inline-block pb-2">Text</label>
                         <textarea
@@ -63,6 +70,7 @@ export default function Page() {
                             id="text"
                             className="bg-gray-100 w-full focus:outline-none py-2 px-4 rounded"
                             rows={5}
+                            onChange={onHandleChange}
                             value={post.text || ""}
                         ></textarea>
                     </div>

@@ -1,7 +1,9 @@
 "use client"
 import { useState, useEffect } from "react"
 import SUPABASE from "./api/supabaseClient"
+import Navbar from './components/Navbar'
 import Header from './components/Header'
+import ModalForm from "./components/ModalForm"
 import ArticleCard from './components/ArticleCard'
 
 interface Posts {
@@ -58,8 +60,17 @@ export default function Page() {
     }
   }
 
+  const appHandleModal = () => {
+    setIsShowModal(!isShowModal)
+  }
+
+  const cancelModal = () => {
+    setIsShowModal(!isShowModal)
+  }
+
   return (
     <>
+      <Navbar navHandleModal={appHandleModal} />
       <Header />
       <main className="w-full md:pt-10 pb-10">
         <div className="container mx-auto px-5 w-full md:w-[900px] lg:w-[1200px]">
@@ -70,6 +81,7 @@ export default function Page() {
           </div>
         </div>
       </main>
+      <ModalForm modalShow={isShowModal} closeModal={cancelModal} />
     </>
   )
 }
