@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import { useParams } from 'next/navigation'
+import Navbar from "../../components/Navbar"
 import SUPABASE from "../../api/supabaseClient"
 import InputForm from "../../components/InputForm"
 
@@ -57,6 +58,7 @@ export default function Page() {
 
     return (
         <>
+            <Navbar newPost={false} />
             <main className="py-10">
                 <form id="form__modal" name="form__modal" className="py-5 w-full max-w-[800px] mx-auto">
                     <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="title" id="title" title="Title" value={post.title} />

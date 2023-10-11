@@ -70,7 +70,7 @@ export default function Page() {
 
   return (
     <>
-      <Navbar navHandleModal={appHandleModal} />
+      <Navbar newPost={true} navHandleModal={appHandleModal} />
       <Header />
       <main className="w-full md:pt-10 pb-10">
         <div className="container mx-auto px-5 w-full md:w-[900px] lg:w-[1200px]">

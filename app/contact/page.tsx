@@ -1,24 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import InputForm from "../components/InputForm"
 
 export default function Page() {
 
-    const [isShowModal, setIsShowModal] = useState<boolean>(false)
-
-    const appHandleModal = () => {
-        setIsShowModal(!isShowModal)
-    }
-
-    const cancelModal = () => {
-        setIsShowModal(!isShowModal)
-    }
-
     return (
         <>
-            <Navbar navHandleModal={appHandleModal} />
+            <Navbar newPost={false} />
             <main className="w-full pt-10 md:pt-14 pb-10 md:pb-20">
                 <div className="container mx-auto px-5 w-full md:w-[800px] lg:w-[1000px]">
                     <section className="mb-10 md:mb-14">
