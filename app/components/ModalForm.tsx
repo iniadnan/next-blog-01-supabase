@@ -51,11 +51,11 @@ function ModalForm(props: { modalShow: boolean, closeModal: () => void }) {
             <div className="py-3 border-b">
                 <h3 className="font-medium text-xl text-gray-500">Add New Post</h3>
             </div>
-            <form id="form__modal" name="form__modal" className="py-5 max-h-[400px] overflow-y-auto">
-                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="title" id="title" title="Title" />
-                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="synopsis" id="synopsis" title="Synopsis" />
-                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="slug" id="slug" title="Slug" />
-                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="author" id="author" title="Author" />
+            <form id="form__modal" name="form__modal" className="py-5 px-2 max-h-[400px] overflow-y-auto">
+                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="title" id="title" title="Title" placeholder="Title" />
+                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="synopsis" id="synopsis" title="Synopsis" placeholder="Synopsis" />
+                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="slug" id="slug" title="Slug" placeholder="Slug" />
+                <InputForm addClass="mb-5" type="text" label={true} onChangeValue={onHandleChange} name="author" id="author" title="Author" placeholder="Author" />
                 <div className="mb-5">
                     <label htmlFor="text" className="text-base text-gray-700 inline-block pb-2">Text</label>
                     <textarea
